@@ -47,7 +47,15 @@ export async function getIssue(owner: string, repo: string, issue_number: number
 
 export async function exportIssueToNotion(issue: Issue): Promise<void> {
   const mds = [issue.body, ...issue.comments.nodes.map(comment => comment.body)]
-  const blocks = mds.flatMap(md => markdownToBlocks(md));
+  const options = {
+    notionLimits: {
+      truncate: true,
+      onError: (err: Error) => {
+        console.error(err);
+      },
+    },
+  }
+  const blocks = mds.flatMap(md => markdownToBlocks(md, options));
 
   await notion.pages.create({
     parent: { type: "database_id", database_id: process.env.NOTION_DATABASE_ID! },
@@ -87,7 +95,7 @@ export async function getIssues(): Promise<Issue[]> {
   const query = `
     query ($owner: String!, $repo: String!) {
       repository(owner: $owner, name: $repo) {
-        issues(last: 3, orderBy: { field: CREATED_AT, direction: ASC }) {
+        issues(last: 100, orderBy: { field: CREATED_AT, direction: ASC }) {
           nodes {
             id
             number
