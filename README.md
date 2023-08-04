@@ -7,6 +7,21 @@ This project exports GitHub issues and pull requests data to Notion.
 - Docker and Docker Compose installed on your machine.
 - Visual Studio Code with the Remote - Containers extension installed.
 
+### Notion API & Database Setup
+
+1. Create a new Notion integration at https://www.notion.com/my-integrations.
+2. Copy the integration's `Internal Integration Token` and save it for later.
+3. Create a new Notion database at https://www.notion.so/help/guides/creating-a-database
+4. Add Notion API token and database ID to `.env` file like below.
+
+```bash
+OWNER=xxx
+REPO=xxx
+GITHUB_TOKEN=xxx
+NOTION_TOKEN=xxx
+NOTION_DATABASE_ID=xxx
+```
+
 ## Project Setup
 
 1. Clone this repository.
