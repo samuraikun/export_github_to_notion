@@ -9,10 +9,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@notionhq/client": "^2.2.9",
     "@octokit/graphql": "^7.0.1",
+    "@octokit/rest": "^20.0.1",
     "@tryfabric/martian": "^1.2.4",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
